@@ -163,12 +163,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="engine_device.cpp" />
     <ClCompile Include="first_app.cpp" />
     <ClCompile Include="Pipeline.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="engine_device.h" />
     <ClInclude Include="first_app.h" />
     <ClInclude Include="Pipeline.h" />
     <ClInclude Include="Window.h" />
