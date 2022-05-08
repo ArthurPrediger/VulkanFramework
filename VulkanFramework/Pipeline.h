@@ -1,6 +1,7 @@
 #pragma once
 
 #include "EngineDevice.h"
+#include "Model.h"
 #include <string>
 #include <vector>
 

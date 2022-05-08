@@ -6,6 +6,7 @@
 
 FirstApp::FirstApp()
 {
+	loadModels();
 	createPipelineLayout();
 	createPipeline();
 	createCommandBuffers();
@@ -13,7 +14,7 @@ FirstApp::FirstApp()
 
 FirstApp::~FirstApp()
 {
-	vkDestroyPipelineLayout(engDevice.device(), pipelineLayout, nullptr);
+	vkDestroyPipelineLayout(device.device(), pipelineLayout, nullptr);
 }
 
 void FirstApp::run()
@@ -24,7 +25,18 @@ void FirstApp::run()
 		drawFrame();
 	}
 
-	vkDeviceWaitIdle(engDevice.device());
+	vkDeviceWaitIdle(device.device());
+}
+
+void FirstApp::loadModels()
+{
+	std::vector<Model::Vertex> vertices {
+		{{0.0f, -0.5f}},
+		{{0.5f, 0.5f}},
+		{{-0.5f, 0.5f}}
+	};
+
+	model = std::make_unique<Model>(device, vertices);
 }
 
 void FirstApp::createPipelineLayout()
@@ -36,7 +48,7 @@ void FirstApp::createPipelineLayout()
 	pipelineLayoutInfo.pushConstantRangeCount = 0;
 	pipelineLayoutInfo.pPushConstantRanges = nullptr;
 
-	if (vkCreatePipelineLayout(engDevice.device(), &pipelineLayoutInfo, nullptr, &pipelineLayout) != VK_SUCCESS)
+	if (vkCreatePipelineLayout(device.device(), &pipelineLayoutInfo, nullptr, &pipelineLayout) != VK_SUCCESS)
 	{
 		throw std::runtime_error("Failed to create pipelineLayout");
 	}
@@ -48,7 +60,7 @@ void FirstApp::createPipeline()
 	pipelineConfig.renderPass = engSwapChain.getRenderPass();
 	pipelineConfig.pipelineLayout = pipelineLayout;
 	pipeline = std::make_unique<Pipeline>(
-		engDevice,
+		device,
 		"Shaders/simple_shader.vert.spv",
 		"Shaders/simple_shader.frag.spv",
 		pipelineConfig
@@ -62,10 +74,10 @@ void FirstApp::createCommandBuffers()
 	VkCommandBufferAllocateInfo allocInfo{};
 	allocInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
 	allocInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
-	allocInfo.commandPool = engDevice.getCommandPool();
+	allocInfo.commandPool = device.getCommandPool();
 	allocInfo.commandBufferCount = static_cast<uint32_t>(commandBuffers.size());
 
-	if (vkAllocateCommandBuffers(engDevice.device(), &allocInfo, commandBuffers.data()) != VK_SUCCESS)
+	if (vkAllocateCommandBuffers(device.device(), &allocInfo, commandBuffers.data()) != VK_SUCCESS)
 	{
 		throw std::runtime_error("Failed to allocate command buffers!");
 	}
@@ -97,7 +109,8 @@ void FirstApp::createCommandBuffers()
 		vkCmdBeginRenderPass(commandBuffers[i], &renderPassInfo, VK_SUBPASS_CONTENTS_INLINE);
 
 		pipeline->bind(commandBuffers[i]);
-		vkCmdDraw(commandBuffers[i], 3, 1, 0, 0);
+		model->bind(commandBuffers[i]);
+		model->draw(commandBuffers[i]);
 
 		vkCmdEndRenderPass(commandBuffers[i]);
 		if (vkEndCommandBuffer(commandBuffers[i]) != VK_SUCCESS)

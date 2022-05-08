@@ -4,6 +4,7 @@
 #include "Pipeline.h"
 #include "EngineDevice.h"
 #include "EngineSwapChain.h"
+#include "Model.h"
 #include <memory>
 
 class FirstApp
@@ -18,15 +19,17 @@ public:
 	FirstApp& operator=(const FirstApp&) = delete;
 	void run();
 private:
+	void loadModels();
 	void createPipelineLayout();
 	void createPipeline();
 	void createCommandBuffers();
 	void drawFrame();
 private:
 	Window window{width, height, "Vulkan Framework"};
-	EngineDevice engDevice{window};
-	EngineSwapChain engSwapChain{ engDevice, window.getExtent() };
+	EngineDevice device{window};
+	EngineSwapChain engSwapChain{ device, window.getExtent() };
 	std::unique_ptr<Pipeline> pipeline;
 	VkPipelineLayout pipelineLayout;
 	std::vector<VkCommandBuffer> commandBuffers;
+	std::unique_ptr<Model> model;
 };

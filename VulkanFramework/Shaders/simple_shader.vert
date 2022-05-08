@@ -1,12 +1,8 @@
 #version 450
 
-vec2 positions[3] = vec2[] (
-	vec2(0.0f, -0.5f),
-	vec2(-0.5f, 0.5f),
-	vec2(0.5f, 0.5f)
-);
+layout(location = 0) in vec2 position; 
 
 void main()
 {
-	gl_Position = vec4(positions[gl_VertexIndex], 0.0f, 1.0f);
+	gl_Position = vec4(position, 0.0f, 1.0f);
 }
