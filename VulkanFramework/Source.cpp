@@ -5,11 +5,11 @@
 
 int main() {
 
-    First_App app;
+    FirstApp app;
 
     try
     {
-        app.Run();
+        app.run();
     }
     catch (const std::exception& e)
     {

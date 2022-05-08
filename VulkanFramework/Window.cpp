@@ -7,7 +7,7 @@ Window::Window(int w, int h, const std::string& name)
 	height(h),
 	windowName(name)
 {
-	InitWindow();
+	initWindow();
 }
 
 Window::~Window()
@@ -16,7 +16,7 @@ Window::~Window()
 	glfwTerminate();
 }
 
-void Window::CreateWindowSurface(VkInstance instance, VkSurfaceKHR* surface)
+void Window::createWindowSurface(VkInstance instance, VkSurfaceKHR* surface)
 {
 	if (glfwCreateWindowSurface(instance, window, nullptr, surface) != VK_SUCCESS)
 	{
@@ -24,7 +24,7 @@ void Window::CreateWindowSurface(VkInstance instance, VkSurfaceKHR* surface)
 	}
 }
 
-void Window::InitWindow()
+void Window::initWindow()
 {
 	glfwInit();
 	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);

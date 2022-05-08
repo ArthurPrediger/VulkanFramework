@@ -1,4 +1,4 @@
-#include "engine_device.h"
+#include "EngineDevice.h"
 
 // std headers
 #include <cstring>
@@ -195,7 +195,7 @@ void EngineDevice::createCommandPool() {
   }
 }
 
-void EngineDevice::createSurface() { window.CreateWindowSurface(instance, &surface_); }
+void EngineDevice::createSurface() { window.createWindowSurface(instance, &surface_); }
 
 bool EngineDevice::isDeviceSuitable(VkPhysicalDevice device) {
   QueueFamilyIndices indices = findQueueFamilies(device);

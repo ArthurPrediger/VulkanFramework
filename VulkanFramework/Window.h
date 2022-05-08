@@ -11,13 +11,17 @@ public:
 	~Window();
 	Window(const Window&) = delete;
 	Window& operator=(const Window&) = delete;
-	bool ShouldClose() const 
+	bool shouldClose() const 
 	{
 		return glfwWindowShouldClose(window);
 	} 
-	void CreateWindowSurface(VkInstance instance, VkSurfaceKHR* surface);
+	VkExtent2D getExtent() const 
+	{
+		return { static_cast<uint32_t>(width), static_cast<uint32_t>(height) };
+	};
+	void createWindowSurface(VkInstance instance, VkSurfaceKHR* surface);
 private:
-	void InitWindow();
+	void initWindow();
 private:
 	GLFWwindow* window;
 	std::string windowName;
