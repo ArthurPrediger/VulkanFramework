@@ -28,5 +28,5 @@ private:
 	EngineSwapChain engSwapChain{ engDevice, window.getExtent() };
 	std::unique_ptr<Pipeline> pipeline;
 	VkPipelineLayout pipelineLayout;
-	std::vector<VkCommandBuffer> CommandBuffers;
+	std::vector<VkCommandBuffer> commandBuffers;
 };

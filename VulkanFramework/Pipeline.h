@@ -12,7 +12,6 @@ struct PipelineConfigInfo
 	VkPipelineRasterizationStateCreateInfo rasterizationInfo;
 	VkPipelineMultisampleStateCreateInfo multisampleInfo;
 	VkPipelineColorBlendAttachmentState colorBlendAttachment;
-	VkPipelineColorBlendStateCreateInfo colorBlendInfo;
 	VkPipelineDepthStencilStateCreateInfo depthStencilInfo;
 	VkPipelineLayout pipelineLayout = nullptr;
 	VkRenderPass renderPass = nullptr;
@@ -26,7 +25,7 @@ public:
 	~Pipeline();
 	Pipeline(const Pipeline&) = delete;
 	Pipeline& operator=(const Pipeline&) = delete;
-
+	void bind(VkCommandBuffer commandBuffer);
 	static PipelineConfigInfo defaultPipelineConfigInfo(uint32_t width, uint32_t height);
 private:
 	static std::vector<char> readFile(const std::string& filePath);
