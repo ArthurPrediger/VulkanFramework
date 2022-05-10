@@ -7,8 +7,17 @@
 #include "Model.h"
 #include <memory>
 
+#define GLM_FORCE_RADIANS
+#define GLM_FORCE_DEPTH_ZERO_TO_ONE
+#include <glm/glm.hpp>
+
 class FirstApp
 {
+	struct SimplePushConstantData
+	{
+		glm::vec2 offset;
+		alignas(16) glm::vec3 color;
+	};
 public:
 	static constexpr int width = 800;
 	static constexpr int height = 600;
