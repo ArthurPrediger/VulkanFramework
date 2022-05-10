@@ -23,11 +23,14 @@ private:
 	void createPipelineLayout();
 	void createPipeline();
 	void createCommandBuffers();
+	void freeCommandBuffers();
 	void drawFrame();
+	void recreateSwapChain();
+	void recordCommandBuffer(int imageIndex);
 private:
 	Window window{width, height, "Vulkan Framework"};
 	EngineDevice device{window};
-	EngineSwapChain engSwapChain{ device, window.getExtent() };
+	std::unique_ptr<EngineSwapChain> engSwapChain;
 	std::unique_ptr<Pipeline> pipeline;
 	VkPipelineLayout pipelineLayout;
 	std::vector<VkCommandBuffer> commandBuffers;

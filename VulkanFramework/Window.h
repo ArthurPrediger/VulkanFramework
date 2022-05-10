@@ -19,12 +19,22 @@ public:
 	{
 		return { static_cast<uint32_t>(width), static_cast<uint32_t>(height) };
 	};
+	bool wasWindowResized() const
+	{
+		return frameBufferResized;
+	}
+	void resetWindowResized()
+	{
+		frameBufferResized = false;
+	}
 	void createWindowSurface(VkInstance instance, VkSurfaceKHR* surface);
 private:
+	static void frameBufferResizeCallback(GLFWwindow* window, int width, int height);
 	void initWindow();
 private:
 	GLFWwindow* window;
 	std::string windowName;
 	int width;
 	int height;
+	bool frameBufferResized = false;
 };
