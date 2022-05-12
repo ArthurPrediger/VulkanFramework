@@ -175,6 +175,7 @@
     <ClInclude Include="EngineDevice.h" />
     <ClInclude Include="EngineSwapChain.h" />
     <ClInclude Include="first_app.h" />
+    <ClInclude Include="GameObject.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Pipeline.h" />
     <ClInclude Include="Window.h" />
