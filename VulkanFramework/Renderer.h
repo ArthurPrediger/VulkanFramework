@@ -23,6 +23,10 @@ public:
 	{
 		return engSwapChain->getRenderPass();
 	}
+	float getAspectRatio() const
+	{
+		return engSwapChain->extentAspectRatio();
+	}
 	bool isFrameInProgress() const
 	{
 		return isFrameStarted;

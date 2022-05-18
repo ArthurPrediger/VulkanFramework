@@ -1,11 +1,8 @@
 #pragma once
 
-#include "Window.h"
-#include "EngineDevice.h"
-#include "Renderer.h"
-#include "GameObject.h"
+#include "Camera.h"
 #include "SimpleRenderSystem.h"
-#include <memory>
+#include "Renderer.h"
 
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
