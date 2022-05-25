@@ -118,7 +118,7 @@ void Renderer::endFrame()
 	if (result == VK_ERROR_OUT_OF_DATE_KHR || result == VK_SUBOPTIMAL_KHR ||
 		window.wasWindowResized())
 	{
-		window.resetWindowResized();
+		window.resetWindowResizedFlag();
 		recreateSwapChain();
 	}
 	else if (result != VK_SUCCESS)

@@ -23,9 +23,13 @@ public:
 	{
 		return frameBufferResized;
 	}
-	void resetWindowResized()
+	void resetWindowResizedFlag()
 	{
 		frameBufferResized = false;
+	}
+	GLFWwindow* getGLFWwindow() const
+	{
+		return window;
 	}
 	void createWindowSurface(VkInstance instance, VkSurfaceKHR* surface);
 private:
