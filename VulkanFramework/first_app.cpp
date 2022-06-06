@@ -61,7 +61,15 @@ void FirstApp::loadGameObjects()
 
     auto gameObj = GameObject::createGameObject();
     gameObj.model = model;
-    gameObj.transform.translation = { 0.0f, 0.0f, 2.5f };
-    gameObj.transform.scale= glm::vec3{3.0f};
+    gameObj.transform.translation = { 0.5f, 0.5f, 2.5f };
+    gameObj.transform.scale= glm::vec3{ 3.0f };
     gameObjects.push_back(std::move(gameObj));
+
+    model = Model::createModelFromFile(device, "models/flat_vase.obj");
+
+    auto gameObj1 = GameObject::createGameObject();
+    gameObj1.model = model;
+    gameObj1.transform.translation = { -0.5f, 0.5f, 2.5f };
+    gameObj1.transform.scale = glm::vec3{ 3.0f, 1.5f, 3.0f };
+    gameObjects.push_back(std::move(gameObj1));
 }

@@ -61,8 +61,9 @@ void SimpleRenderSystem::renderGameObjects(VkCommandBuffer commandBuffer, std::v
 	for (auto& obj : gameObjects)
 	{
 		SimplePushConstantData push{};
-		push.color = obj.color;
-		push.transform = projectionView * obj.transform.mat4();
+		auto modelMatrix = obj.transform.mat4();
+		push.transform = projectionView * modelMatrix;
+		push.normalMatrix = obj.transform.normalMatrix();
 
 		vkCmdPushConstants(
 			commandBuffer,
